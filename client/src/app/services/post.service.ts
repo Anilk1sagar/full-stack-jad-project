@@ -1,12 +1,13 @@
 import { Ipost } from "../interfaces/post.interface";
+import { buildApiUrl } from "../utils/helpers";
 
 class PostService {
   fetchAllPosts(): Promise<Ipost[]> {
-    return fetch("http://localhost:3001/api/posts").then((res) => res.json());
+    return fetch(buildApiUrl("/posts")).then((res) => res.json());
   }
 
   createPost(payload: Ipost): Promise<Ipost> {
-    return fetch("http://localhost:3001/api/posts", {
+    return fetch(buildApiUrl("/posts"), {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(payload),
@@ -15,5 +16,4 @@ class PostService {
 }
 
 const postService = new PostService();
-
 export default postService;
